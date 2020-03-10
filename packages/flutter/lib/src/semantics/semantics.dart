@@ -632,6 +632,7 @@ class SemanticsProperties extends DiagnosticableTree {
     this.onDidGainAccessibilityFocus,
     this.onDidLoseAccessibilityFocus,
     this.onDismiss,
+    this.onDefaultAction,
     this.customSemanticsActions,
   });
 
@@ -1123,6 +1124,18 @@ class SemanticsProperties extends DiagnosticableTree {
   /// menu, and VoiceOver users on iOS can trigger this action with a standard
   /// gesture or menu option.
   final VoidCallback onDismiss;
+
+  /// The handler for [SemanticsAction.defaultAction].
+  ///
+  /// This is a request to perform a default action for the node,
+  /// which typically toggles the most important state on the node.
+  ///
+  /// VoiceOver users on iOS can perform a double two-finger tap (MagicTap)
+  /// to send this request.
+  ///
+  /// As examples, in the Phone app it answers and ends calls,
+  /// in the Music app it starts and pauses playback.
+  final VoidCallback onDefaultAction;
 
   /// A map from each supported [CustomSemanticsAction] to a provided handler.
   ///
@@ -2918,6 +2931,23 @@ class SemanticsConfiguration {
   set onDismiss(VoidCallback value) {
     _addArgumentlessAction(SemanticsAction.dismiss, value);
     _onDismiss = value;
+  }
+
+  /// The handler for [SemanticsAction.defaultAction].
+  ///
+  /// This is a request to perform a default action for the node,
+  /// which typically toggles the most important state of the node.
+  ///
+  /// VoiceOver users on iOS can perform a double two-finger tap,
+  /// also known as a Magic Tap, to send this request.
+  ///
+  /// As examples, in the Phone app it answers and ends calls,
+  /// in the Music app it starts and pauses playback.
+  VoidCallback get onDefaultAction => _onDefaultAction;
+  VoidCallback _onDefaultAction;
+  set onDefaultAction(VoidCallback value) {
+    _addArgumentlessAction(SemanticsAction.defaultAction, value);
+    _onDefaultAction = value;
   }
 
   /// The handler for [SemanticsAction.scrollRight].

@@ -3595,6 +3595,7 @@ class RenderSemanticsAnnotations extends RenderProxyBox {
     SemanticsSortKey sortKey,
     VoidCallback onTap,
     VoidCallback onDismiss,
+    VoidCallback onDefaultAction,
     VoidCallback onLongPress,
     VoidCallback onScrollLeft,
     VoidCallback onScrollRight,
@@ -3639,6 +3640,7 @@ class RenderSemanticsAnnotations extends RenderProxyBox {
        _hidden = hidden,
        _image = image,
        _onDismiss = onDismiss,
+       _onDefaultAction = onDefaultAction,
        _label = label,
        _value = value,
        _increasedValue = increasedValue,
@@ -4078,6 +4080,27 @@ class RenderSemanticsAnnotations extends RenderProxyBox {
       return;
     final bool hadValue = _onDismiss != null;
     _onDismiss = handler;
+    if ((handler != null) == hadValue)
+      markNeedsSemanticsUpdate();
+  }
+
+  /// The handler for [SemanticsAction.defaultAction].
+  ///
+  /// This is a request to perform a default action for the node,
+  /// which typically toggles the most important state on the node.
+  ///
+  /// VoiceOver users on iOS can perform a double two-finger tap (MagicTap)
+  /// to send this request.
+  ///
+  /// As examples, in the Phone app it answers and ends calls,
+  /// in the Music app it starts and pauses playback.
+  VoidCallback get onDefaultAction => _onDefaultAction;
+  VoidCallback _onDefaultAction;
+  set onDefaultAction(VoidCallback handler) {
+    if (_onDefaultAction == handler)
+      return;
+    final bool hadValue = _onDefaultAction != null;
+    _onDefaultAction = handler;
     if ((handler != null) == hadValue)
       markNeedsSemanticsUpdate();
   }
@@ -4529,6 +4552,8 @@ class RenderSemanticsAnnotations extends RenderProxyBox {
       config.onLongPress = _performLongPress;
     if (onDismiss != null)
       config.onDismiss = _performDismiss;
+    if (onDefaultAction != null)
+      config.onDefaultAction = _performDefaultAction;
     if (onScrollLeft != null)
       config.onScrollLeft = _performScrollLeft;
     if (onScrollRight != null)
@@ -4578,6 +4603,11 @@ class RenderSemanticsAnnotations extends RenderProxyBox {
   void _performDismiss() {
     if (onDismiss != null)
       onDismiss();
+  }
+
+  void _performDefaultAction() {
+    if (onDefaultAction != null)
+      onDefaultAction();
   }
 
   void _performScrollLeft() {

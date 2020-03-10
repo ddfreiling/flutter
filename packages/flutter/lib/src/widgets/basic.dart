@@ -6506,6 +6506,7 @@ class Semantics extends SingleChildRenderObjectWidget {
     VoidCallback onCut,
     VoidCallback onPaste,
     VoidCallback onDismiss,
+    VoidCallback onDefaultAction,
     MoveCursorHandler onMoveCursorForwardByCharacter,
     MoveCursorHandler onMoveCursorBackwardByCharacter,
     SetSelectionHandler onSetSelection,
@@ -6563,6 +6564,7 @@ class Semantics extends SingleChildRenderObjectWidget {
       onDidGainAccessibilityFocus: onDidGainAccessibilityFocus,
       onDidLoseAccessibilityFocus: onDidLoseAccessibilityFocus,
       onDismiss: onDismiss,
+      onDefaultAction: onDefaultAction,
       onSetSelection: onSetSelection,
       customSemanticsActions: customSemanticsActions,
       hintOverrides: onTapHint != null || onLongPressHint != null ?
@@ -6672,6 +6674,7 @@ class Semantics extends SingleChildRenderObjectWidget {
       onDecrease: properties.onDecrease,
       onCopy: properties.onCopy,
       onDismiss: properties.onDismiss,
+      onDefaultAction: properties.onDefaultAction,
       onCut: properties.onCut,
       onPaste: properties.onPaste,
       onMoveCursorForwardByCharacter: properties.onMoveCursorForwardByCharacter,
@@ -6740,6 +6743,7 @@ class Semantics extends SingleChildRenderObjectWidget {
       ..onScrollDown = properties.onScrollDown
       ..onIncrease = properties.onIncrease
       ..onDismiss = properties.onDismiss
+      ..onDefaultAction = properties.onDefaultAction
       ..onDecrease = properties.onDecrease
       ..onCopy = properties.onCopy
       ..onCut = properties.onCut

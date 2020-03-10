@@ -961,6 +961,9 @@ class RenderCustomPaint extends RenderProxyBox {
     if (properties.onDismiss != null) {
       config.onDismiss = properties.onDismiss;
     }
+    if (properties.onDefaultAction != null) {
+      config.onDefaultAction = properties.onDefaultAction;
+    }
 
     newChild.updateWith(
       config: config,

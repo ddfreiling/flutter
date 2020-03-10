@@ -606,6 +606,8 @@ void main() {
     expect(config.onIncrease, isNull);
     expect(config.onMoveCursorForwardByCharacter, isNull);
     expect(config.onMoveCursorBackwardByCharacter, isNull);
+    expect(config.onDismiss, isNull);
+    expect(config.onDefaultAction, isNull);
     expect(config.onTap, isNull);
     expect(config.customSemanticsActions[customAction], isNull);
 
@@ -630,6 +632,8 @@ void main() {
     final VoidCallback onIncrease = () { };
     final MoveCursorHandler onMoveCursorForwardByCharacter = (bool _) { };
     final MoveCursorHandler onMoveCursorBackwardByCharacter = (bool _) { };
+    final VoidCallback onDismiss = () { };
+    final VoidCallback onDefaultAction = () { };
     final VoidCallback onTap = () { };
     final VoidCallback onCustomAction = () { };
 
@@ -643,6 +647,8 @@ void main() {
     config.onIncrease = onIncrease;
     config.onMoveCursorForwardByCharacter = onMoveCursorForwardByCharacter;
     config.onMoveCursorBackwardByCharacter = onMoveCursorBackwardByCharacter;
+    config.onDismiss = onDismiss;
+    config.onDefaultAction = onDefaultAction;
     config.onTap = onTap;
     config.customSemanticsActions[customAction] = onCustomAction;
 
@@ -667,6 +673,8 @@ void main() {
     expect(config.onIncrease, same(onIncrease));
     expect(config.onMoveCursorForwardByCharacter, same(onMoveCursorForwardByCharacter));
     expect(config.onMoveCursorBackwardByCharacter, same(onMoveCursorBackwardByCharacter));
+    expect(config.onDismiss, same(onDismiss));
+    expect(config.onDefaultAction, same(onDefaultAction));
     expect(config.onTap, same(onTap));
     expect(config.customSemanticsActions[customAction], same(onCustomAction));
   });
